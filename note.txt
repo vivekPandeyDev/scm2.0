@@ -1,1 +1,4 @@
 npx tailwindcss -i ./src/main/resources/static/css/input.css -o ./src/main/resources/static/css/output.css --watch
+
+password -> ]{2,[4[*x`+%8Yk%yI
+email -> admin@gmail.com
