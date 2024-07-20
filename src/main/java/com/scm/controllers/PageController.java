@@ -16,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scm.domain.Message;
 import com.scm.domain.UserRequest;
+import com.scm.entities.User;
+import com.scm.service.UserService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +29,9 @@ import lombok.extern.slf4j.Slf4j;
 public class PageController {
 
     private final MessageSource messageSource;
+    private final UserService userService;
 
     private static final String USER_FORM = "userForm";
-
-    private static final String REGISTRATION_FAILED = "";
-    private static final String RED = "";
 
     @RequestMapping({ "/home", "/" })
     public String home(Model model) {
@@ -80,15 +80,18 @@ public class PageController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userForm",
                     bindingResult);
             redirectAttributes.addFlashAttribute(USER_FORM, userRequest);
-            String content = getMessage("user.registration.failed", LocaleContextHolder.getLocale(), "User Registration Failed");
+            String content = getMessage("user.registration.failed", LocaleContextHolder.getLocale(),
+                    "User Registration Failed");
             String color = getMessage("color.error", LocaleContextHolder.getLocale(), "red");
             Message errorMessage = Message.builder().content(content).color(color).build();
             redirectAttributes.addFlashAttribute("message", errorMessage);
             return "redirect:/register";
         }
-        // TODO service call to save user in db
-        
-        String content = getMessage("user.registration.success", LocaleContextHolder.getLocale(), "User Registration Success");
+
+        userService.saveUser(getUserFromDto(userRequest));
+
+        String content = getMessage("user.registration.success", LocaleContextHolder.getLocale(),
+                "User Registration Success");
         String color = getMessage("color.success", LocaleContextHolder.getLocale(), "green");
         Message errorMessage = Message.builder().content(content).color(color).build();
         redirectAttributes.addFlashAttribute("message", errorMessage);
@@ -105,5 +108,18 @@ public class PageController {
 
     private String getMessage(String key, Locale locale, String defaultMessage) {
         return messageSource.getMessage(key, null, defaultMessage, locale);
+    }
+
+    private User getUserFromDto(UserRequest userForm) {
+        User user = new User();
+        user.setName(userForm.getName());
+        user.setEmail(userForm.getEmail());
+        user.setPassword(userForm.getPassword());
+        user.setAbout(userForm.getAbout());
+        user.setPhoneNumber(userForm.getPhoneNumber());
+        user.setEnabled(true);
+        user.setProfilePic(
+                "https://1.img-dpreview.com/files/p/TS200x100~sample_galleries/3002635523/4971879462.jpg");
+        return user;
     }
 }
