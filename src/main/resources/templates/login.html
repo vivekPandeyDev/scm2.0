@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+
+<head>
+  <title>Login</title>
+</head>
+
+<body>
+  <div id="content">
+    <div data-th-replace="~{message::messagebox}"></div>
+    <h1>Welcome to Login</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
+      ratione!
+    </p>
+  </div>
+  <script>
+    hideElementAfterDelay("alert-message", 3000)
+  </script>
+</body>
+
+</html>
