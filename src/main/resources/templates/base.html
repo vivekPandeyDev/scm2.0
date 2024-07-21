@@ -4,7 +4,6 @@
   lang="en"
   th:fragment="parent(content,title,script)"
   xmlns:th="http://www.thymeleaf.org"
-  xmlns:sec="http://www.thymeleaf.org/extras/springsecurity6"
 >
   <head>
     <meta charset="UTF-8" />
@@ -39,6 +38,7 @@
     <footer class="p-4 flex justify-center flex-col items-center">Footer: Learn Code With Vivek Pandey</footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script data-th-src="@{'/js/script.js'}"></script>
     <th:block data-th-replace="${script}"></th:block>
   </body>
