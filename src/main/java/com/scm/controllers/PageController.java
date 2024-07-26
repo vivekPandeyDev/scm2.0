@@ -22,6 +22,8 @@ import com.scm.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
@@ -32,6 +34,11 @@ public class PageController {
     private final UserService userService;
 
     private static final String USER_FORM = "userForm";
+
+    @GetMapping("/test")
+    public String getMethodName() {
+        return "test";
+    }
 
     @RequestMapping({ "/home", "/" })
     public String home(Model model) {

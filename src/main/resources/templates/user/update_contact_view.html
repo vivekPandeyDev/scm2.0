@@ -8,14 +8,6 @@
   </head>
   <body>
     <div id="content">
-      <!-- sidebar -->
-
-      <!-- user is logged in : sidebar -->
-
-      <div th:if="${loggedInUser}">
-        <div data-th-replace="~{user/sidebar :: sidebar}"></div>
-      </div>
-
       <div class="sm:pl-64 pt-20 flex justify-center flex-col items-center" style="height: 1000px">
         <div class="grid grid-cols-12">
           <div class="col-span-3"></div>

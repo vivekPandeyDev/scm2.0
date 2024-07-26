@@ -3,9 +3,12 @@ const changeThemeButton = document.querySelector("#theme_change_button");
 const alertMessage = document.getElementById("alert-message");
 const htmlElement = document.querySelector("html");
 const themeButtonSpanElement = document.querySelector("#theme_change_button").querySelector("span")
-const LIGHT_THEME = "light";
-const DARK_THEME = "dark";
+/*<![CDATA[*/
+const LIGHT_THEME =  /*[[#{light_mode}]]*/ "Light";
+const DARK_THEME = /*[[#{dark_mode}]]*/ "Dark";
+/*]]>*/
 
+console.log(themeButtonSpanElement)
 
 document.addEventListener("DOMContentLoaded", () => {
   const currentTheme = getStorageTheme();
@@ -13,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 changeThemeButton.addEventListener("click", () => {
-  console.log("change theme button clicked");
   const currentTheme = getStorageTheme();
   changeCurrentTheme(currentTheme)
 });
