@@ -1,8 +1,8 @@
 <th:block th:fragment="sidebar">
   <aside data-th-if="${loggedInUser}" data-th-fragment="sidebar" id="logo-sidebar"
-    class="w-64 flex-shrink-0 flex-grow-0  hidden sm:block transition-transform -translate-x-full sm:translate-x-0"
+    class="w-64 flex-shrink-0 flex-grow-0  hidden md:block transition-transform -translate-x-full sm:translate-x-0 bg-gray-900"
     aria-label="Sidebar">
-    <div class="h-full px-3 py-4 overflow-y-auto bg-white border-gray-900 shadow-sm dark:bg-gray-900">
+    <div class="px-3 py-4 overflow-y-auto bg-white border-gray-900 shadow-sm dark:bg-gray-900">
       <!-- brand -->
       <a data-th-src="@{'/'}" class="flex items-center justify-center rtl:space-x-reverse mb-3 gap-2">
         <img data-th-src="@{'/images/telephone.png'}" class="h-8 shadow rounded-full" alt="Flowbite Logo" />
@@ -10,9 +10,9 @@
       </a>
 
       <!-- end of brand logo -->
-      <a href="https://flowbite.com/" class="flex flex-col items-center ps-2.5 mb-8">
+      <a href="/" class="flex flex-col items-center ps-2.5 mb-8">
         <img data-th-src="@{${loggedInUser.profilePic}}" src="https://flowbite.com/docs/images/logo.svg"
-          class="h-16 me-3 sm:h-24 shadow-md rounded-full" alt="Flowbite Logo" />
+          class="h-16 me-3 sm:h-24 shadow-md rounded-full" alt="Flowbite Logo" draggable="false"/>
 
         <span class="text-gray-500" data-th-text="${loggedInUser.name}">VIvek Pandey</span>
         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Welcome to SCM</span>
