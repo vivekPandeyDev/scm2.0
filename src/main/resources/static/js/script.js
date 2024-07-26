@@ -3,12 +3,14 @@ const changeThemeButton = document.querySelector("#theme_change_button");
 const alertMessage = document.getElementById("alert-message");
 const htmlElement = document.querySelector("html");
 const themeButtonSpanElement = document.querySelector("#theme_change_button").querySelector("span")
-/*<![CDATA[*/
-const LIGHT_THEME =  /*[[#{light_mode}]]*/ "Light";
-const DARK_THEME = /*[[#{dark_mode}]]*/ "Dark";
-/*]]>*/
 
-console.log(themeButtonSpanElement)
+const LIGHT_THEME = "light";
+const DARK_THEME = "dark";
+
+const DARK_THEME_TEXT = "Dark Mode";
+const LIGHT_THEME_TEXT = "Light Mode";
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const currentTheme = getStorageTheme();
@@ -37,12 +39,12 @@ function changeCurrentTheme(currentTheme) {
   if (currentTheme === LIGHT_THEME) {
     htmlElement.classList.remove(LIGHT_THEME)
     htmlElement.classList.add(DARK_THEME)
-    themeButtonSpanElement.textContent = DARK_THEME
+    themeButtonSpanElement.textContent = DARK_THEME_TEXT
     setStorageTheme(DARK_THEME)
   } else {
     htmlElement.classList.remove(DARK_THEME)
     htmlElement.classList.add(LIGHT_THEME)
-    themeButtonSpanElement.textContent = LIGHT_THEME
+    themeButtonSpanElement.textContent = LIGHT_THEME_TEXT
     setStorageTheme(LIGHT_THEME)
   }
 }
@@ -51,11 +53,11 @@ function applyCurrentTheme(currentTheme) {
   if (currentTheme === LIGHT_THEME) {
     htmlElement.classList.remove(DARK_THEME)
     htmlElement.classList.add(LIGHT_THEME)
-    themeButtonSpanElement.textContent = LIGHT_THEME
+    themeButtonSpanElement.textContent = LIGHT_THEME_TEXT
   } else {
     htmlElement.classList.remove(LIGHT_THEME)
     htmlElement.classList.add(DARK_THEME)
-    themeButtonSpanElement.textContent = DARK_THEME
+    themeButtonSpanElement.textContent = DARK_THEME_TEXT
   }
 }
 
@@ -63,7 +65,7 @@ function applyCurrentTheme(currentTheme) {
 
 function hideElementAfterDelay(elementId, delay) {
   const element = document.getElementById(elementId);
-  console.log("element" , element)
+  console.log("element", element)
   if (element) {
     setTimeout(() => {
       element.style.transition = 'opacity 0.5s';  // Optional: for smooth fade out
