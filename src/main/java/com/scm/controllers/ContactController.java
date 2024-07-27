@@ -132,7 +132,7 @@ public class ContactController {
         model.addAttribute("pageSize", AppConstant.PAGE_SIZE);
 
         model.addAttribute("contactSearchForm", new ContactSearchForm());
-
+        model.addAttribute("isSearchPage", true);
         return "user/contacts";
     }
 
@@ -170,8 +170,9 @@ public class ContactController {
         model.addAttribute("pageContact", pageContact);
 
         model.addAttribute("pageSize", AppConstant.PAGE_SIZE);
+        model.addAttribute("isSearchPage", true);
 
-        return "user/search";
+        return "user/contacts";
     }
 
      // detete contact
