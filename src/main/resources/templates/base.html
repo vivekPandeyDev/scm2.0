@@ -14,9 +14,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
-<body class="dark:bg-gray-700 dark:text-white">
+<body class="dark:bg-gray-800 dark:text-white">
     <!-- Container for the entire layout -->
-    <div class="grid grid-cols-1 md:flex">
+    <div class="grid grid-cols-1 md:flex md:min-h-screen">
         <!-- Fixed Sidebar (hidden on small and mid screens) -->
         <th:block data-th-replace="~{user/sidebar :: sidebar}" class="md:flex-grow-0"></th:block>
 
@@ -24,9 +24,11 @@
         <!-- Main Content Area -->
         <div class="flex flex-col md:w-full">
             <!-- Top Navigation Bar -->
-            <th:block  data-th-replace="~{navbar :: navbar}"></th:block>
+            <th:block data-th-replace="~{navbar :: navbar}"></th:block>
             <!-- Main content here -->
-            <th:block data-th-replace="${content}"></th:block>
+            <div class="container mx-auto">
+                <th:block data-th-replace="${content}"></th:block>
+            </div>
         </div>
     </div>
 

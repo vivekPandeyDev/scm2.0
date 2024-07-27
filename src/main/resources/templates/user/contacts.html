@@ -6,11 +6,17 @@
 </head>
 
 <body>
-  <div id="content">
+  <div id="content" class="md:my-32">
     <div>
-      <h1 class="text-5xl text-center mt-5">All Your Contacts</h1>
-      <p class="text-center mb-5">List of all contacts...</p>
-      <div class="flex md:flex-row flex-col items-center px-4 justify-between bg-white dark:bg-gray-900 mt-2">
+      <div th:unless="${isSearchPage}">
+        <h1 class="text-5xl text-center mt-5">All Your Contacts</h1>
+        <p class="text-center mb-5">List of all contacts...</p>
+      </div>
+      <div class="flex justify-center flex-col items-center" th:if="${isSearchPage}">
+        <h1 class="text-5xl">Search Results</h1>
+        <p data-th-text="${pageContact.totalElements}+' results found'"></p>
+      </div>
+      <div class="flex md:flex-row flex-col items-center px-4 justify-between bg-white dark:bg-gray-900 mt-2 p-3">
         <form data-th-object="${contactSearchForm}" action="" data-th-action="@{'/user/contacts/search'}"
           class="w-full md:w-auto">
           <div class="flex flex-col md:flex-row gap-2 mt-2 md:space-x-2 md:space-y-0 space-y-2">
@@ -159,6 +165,7 @@
         },
       });
     }
+    hideElementAfterDelay("alert-message", 3000)
   </script>
 </body>
 
