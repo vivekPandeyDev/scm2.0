@@ -22,8 +22,6 @@ import com.scm.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @Slf4j
@@ -34,48 +32,18 @@ public class PageController {
     private final UserService userService;
 
     private static final String USER_FORM = "userForm";
-
-    @GetMapping("/test")
-    public String getMethodName() {
-        return "test";
-    }
+    private static final String SAMPLE_PROFILE = "https://1.img-dpreview.com/files/p/TS200x100~sample_galleries/3002635523/4971879462.jpg";
 
     @RequestMapping({ "/home", "/" })
     public String home(Model model) {
-        System.out.println("Home page handler");
-        // sending data to view
-        model.addAttribute("name", "Substring Technologies");
-        model.addAttribute("youtubeChannel", "Learn Code With Vivek Pandey");
-        model.addAttribute("githubRepo", "https://github.com/learncodewithdurgesh/");
+        log.info("Home page handler");
+        model.addAttribute("githubRepo", "https://github.com/vivekPandeyDev/graph-ql");
         return "home";
-    }
-
-    // about route
-
-    @RequestMapping("/about")
-    public String aboutPage(Model model) {
-        model.addAttribute("isLogin", true);
-        System.out.println("About page loading");
-        return "about";
-    }
-
-    // services
-
-    @RequestMapping("/services")
-    public String servicesPage() {
-        System.out.println("services page loading");
-        return "services";
-    }
-
-    // contact page
-
-    @GetMapping("/contact")
-    public String contact() {
-        return "contact";
     }
 
     @GetMapping("/login")
     public String login() {
+        log.info("login page handler");
         return "login";
     }
 
@@ -107,6 +75,7 @@ public class PageController {
 
     @GetMapping(path = { "/register" })
     public String register(Model model) {
+        log.info("register page handler");
         if (!model.containsAttribute(USER_FORM)) {
             model.addAttribute(USER_FORM, new UserRequest());
         }
@@ -126,7 +95,7 @@ public class PageController {
         user.setPhoneNumber(userForm.getPhoneNumber());
         user.setEnabled(true);
         user.setProfilePic(
-                "https://1.img-dpreview.com/files/p/TS200x100~sample_galleries/3002635523/4971879462.jpg");
+                SAMPLE_PROFILE);
         return user;
     }
 }

@@ -1,29 +1,57 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
->
-  <head>
-    <title data-th-text="${loggedInUser.name}+' |  Dashboard'">
-      Profile Page
-    </title>
-  </head>
-  <body>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
 
-    <div id="content" class="mx-auto">
-      <div class="">
-        <div class="flex justify-center flex-col items-center">
-          <h1 class="text-5xl">Welcome to Dashbaord page</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Consequatur, ratione!
+<head>
+  <title data-th-text="${loggedInUser.name}+' |  Dashboard'">
+    Profile Page
+  </title>
+</head>
+
+<body>
+
+  <div id="content" class="md:mt-5 mt-2  text-gray-800 dark:text-gray-200 w-full">
+    <div class="">
+      <h1 class="text-3xl font-bold mb-6 text-center">Welcome to Your Dashboard</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="hidden lg:block lg:col-span-1"></div>
+        <!-- Personal Info Card -->
+        <div class="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-700">
+          <h2 class="text-2xl font-bold mb-4 text-center">Personal Information</h2>
+          <img th:src="${loggedInUser.profilePic}" src="https://via.placeholder.com/150" alt="Profile"
+            class="mb-4 rounded-full mx-auto">
+          <p class="mb-2"><strong>Name:</strong> <span th:text="${loggedInUser.name}">John Doe </span></p>
+          <p class="mb-2"><strong>Email:</strong> <span th:text="${loggedInUser.email}">john.doe@example.com</span> </p>
+          <p class="mb-2"><strong>Phone:</strong>
+            <span th:if="${loggedInUser.phoneNumber}" th:text="${loggedInUser.phoneNumber}">+91253253 </span>
+            <span>No Contact Info for now</span>
+          </p>
+          <p class="mb-2"><strong>Provider:</strong> <span th:text="${loggedInUser.provider}">GOOGLE</span></p>
+          <p class="mb-2"><strong>About:</strong> <span th:text="${loggedInUser.about}">GOOGLE</span></p>
+        </div>
+
+        <!-- Contacts Summary Card -->
+        <div class="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-700">
+          <h2 class="text-2xl font-bold mb-4 text-center">Contacts Summary</h2>
+          <img th:src="@{'/images/contact-summary.jpg'}" src="https://via.placeholder.com/150" alt="Contacts" class="mb-4 rounded mx-auto">
+          <p class="mb-2"><strong>Total Contacts:</strong>
+            <span th:if="${contactSize == 0}">ZERO</span>
+            <span th:unless="${contactSize == 0}" th:text="${contactSize}">120</span>
+          </p>
+          <p class="mb-2"><strong>Favorites:</strong>
+            <span th:if="${favorite == 0}">ZERO</span>
+            <span th:unless="${favorite == 0}" th:text="${favorite}">120</span>
           </p>
         </div>
+
       </div>
     </div>
+</div>
 
-    <script>
-      console.log("this is profile page");
-    </script>
-  </body>
+
+  <script>
+    console.log("this is profile page");
+  </script>
+</body>
+
 </html>

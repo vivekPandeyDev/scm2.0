@@ -8,12 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.scm.entities.Contact;
+import com.scm.entities.User;
+import com.scm.helper.Helper;
+import com.scm.repo.ContactRepo;
+import com.scm.service.ContactService;
 import com.scm.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-
 
 @Controller
 @RequestMapping("/user")
@@ -21,14 +24,25 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class UserController {
 
-
     private final UserService userService;
+    private final ContactService contactService;
 
     // user dashbaord page
 
     @RequestMapping(value = "/dashboard")
-    public String userDashboard() {
+    public String userDashboard(Model model, Authentication authentication) {
         log.info("User dashboard");
+        if (authentication == null) {
+            return "home";
+        }
+
+        String username = Helper.getEmailOfLoggedInUser(authentication);
+        log.info("User logged in: {}", username);
+        User user = userService.getUserByEmail(username);
+        int contactSize = user.getContacts().size();
+        long noOfFavorite = user.getContacts().stream().map(Contact::isFavorite).count();
+        model.addAttribute("contactSize", contactSize);
+        model.addAttribute("favorite", noOfFavorite);
         return "user/dashboard";
     }
 
@@ -39,6 +53,5 @@ public class UserController {
 
         return "user/profile";
     }
-
 
 }

@@ -1,21 +1,146 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
->
-  <head>
-    <title>Home page</title>
-  </head>
-  <body>
-    <div id="content">
-      <h1>Welcome to home page</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur,
-        ratione!
-      </p>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Contact Manager</title>
+  <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
+  <link rel="stylesheet" data-th-href="@{'/css/style.css'}" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+  <!-- font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="dark:bg-gray-800 dark:text-white bg-white text-gray-800">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex">
+          <div class="shrink-0 flex items-center">
+            <img data-th-src="@{'/images/telephone.png'}" class="h-12 shadow rounded-full p-2" alt="Flowbite Logo" draggable="false"/>
+            <!-- brand -->
+            <a data-th-href="@{'/'}">
+              <span class="text-4xl font-semibold whitespace-nowrap dark:text-white" th:text="#{project_title}">Sample
+                title</span>
+            </a>
+            <!-- end of brand logo -->
+          </div>
+        </div>
+        <div class="flex items-center">
+          <!-- Hidden by default on small screens, shown on medium and larger screens -->
+          <div class="hidden md:flex items-center space-x-4">
+            <a th:href="@{'/user/contacts'}"
+              class="text-gray-800 dark:text-gray-200 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">User</a>
+            <a id="theme_change_button"
+              class="text-gray-800 dark:text-gray-200 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium"><span>Light</span></a>
+          </div>
+          <!-- Hamburger button for small screens -->
+          <div class="md:hidden">
+            <button id="menu_button"
+              class="text-gray-800 dark:text-gray-200 hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <script>
-      console.log("Home page");
-    </script>
-  </body>
+    <!-- Mobile menu, hidden by default -->
+    <div id="mobile_menu" class="hidden md:hidden pb-2">
+      <a th:href="@{'/user/dashboard'}"
+        class="block text-gray-800 dark:text-gray-200 hover:text-gray-600 px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
+      <a th:href="@{'/login'}"
+        class="block text-gray-800 dark:text-gray-200 hover:text-gray-600 px-3 py-2 rounded-md text-base font-medium">Login</a>
+      <a id="mobile_theme_change_button"
+        class="block text-gray-800 dark:text-gray-200 hover:text-gray-600 px-3 py-2 rounded-md text-base font-medium"><span>Light</span></a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="bg-gray-800 text-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold sm:text-4xl">Manage Your Contacts Efficiently</h2>
+      <p class="mt-4 text-lg">Keep track of your contacts with ease and access them anytime, anywhere.</p>
+      <div class="mt-8">
+        <a th:href="@{'user/dashboard'}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Get Started</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features Section -->
+  <section class="bg-white py-12 dark:bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h3 class="text-2xl font-bold dark:text-white">Features</h3>
+        <p class="mt-4 text-lg dark:text-gray-300">Our Smart Contact Manager offers a variety of features to help you
+          stay organized.</p>
+      </div>
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center dark:bg-gray-700">
+          <img th:src="@{'/images/manage-contact.jpg'}" src="https://via.placeholder.com/150" alt="Easy Contact Management" class="mx-auto mb-4" draggable="false">
+          <h4 class="text-xl font-bold dark:text-white">Easy Contact Management</h4>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">Add, edit, and delete contacts with a user-friendly
+            interface.</p>
+        </div>
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center dark:bg-gray-700">
+          <img th:src="@{'/images/secure-storage.jpg'}" src="https://via.placeholder.com/150" alt="Secure Storage" class="mx-auto mb-4" draggable="false">
+          <h4 class="text-xl font-bold dark:text-white">Secure Storage</h4>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">Your contacts are stored securely and can only be accessed by
+            you.</p>
+        </div>
+        <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center dark:bg-gray-700">
+          <img th:src="@{'/images/easy-access.jpg'}" src="https://via.placeholder.com/150" alt="Accessibility" class="mx-auto mb-4" draggable="false">
+          <h4 class="text-xl font-bold dark:text-white">Accessibility</h4>
+          <p class="mt-2 text-gray-600 dark:text-gray-300">Access your contacts from any device, anywhere in the world.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white fixed bottom-0 w-full dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center">
+      <p>&copy; 2024 Smart Contact Manager. All rights reserved.</p>
+    </div>
+  </footer>
+  <script data-th-src="@{'/js/script.js'}"></script>
+  <script>
+    document.getElementById('mobile_theme_change_button').addEventListener('click', function () {
+      //call original theme button
+      const themeButton = document.getElementById('theme_change_button');
+      themeButton.click();
+      // change text of mobile
+      const mobileThemeButtonSpan = document.querySelector('#mobile_theme_change_button span');
+      if (mobileThemeButtonSpan.textContent === 'Light') {
+        mobileThemeButtonSpan.textContent = 'Dark';
+      } else {
+        mobileThemeButtonSpan.textContent = 'Light';
+      }
+      const mobileMenu = document.getElementById('mobile_menu');
+      if (mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.remove('hidden');
+      } else {
+        mobileMenu.classList.add('hidden');
+      }
+    })
+
+    document.getElementById('menu_button').addEventListener('click', function () {
+      const mobileMenu = document.getElementById('mobile_menu');
+      if (mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.remove('hidden');
+      } else {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+
 </html>
